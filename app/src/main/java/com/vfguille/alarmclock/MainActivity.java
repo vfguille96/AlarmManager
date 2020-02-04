@@ -2,7 +2,11 @@ package com.vfguille.alarmclock;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +16,7 @@ import android.widget.TimePicker;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int REQUEST_CODE = 2020;
     Button button;
     TextView textView;
     Calendar calendar;
@@ -39,8 +44,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setAlarmManager() {
 
+    /**
+     * Establece una alarma en el sistema
+     */
+    private void setAlarmManager() {
+        // Intent personalizado.
+        Intent intent = new Intent("com.vfguille.alarmclock");
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) this.getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
     }
 
     private void createTimePickerDialog() {
