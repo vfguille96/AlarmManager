@@ -17,11 +17,13 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".AlarmClockReceiver">
+       <!--
+       No se permite registrar intent personalizado.
+       <receiver android:name=".AlarmClockReceiver">
             <intent-filter>
                 <action android:name="com.vfguille.alarmclock"/>
             </intent-filter>
-        </receiver>
+        </receiver>-->
     </application>
 
 </manifest>
